@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CUP to OpenAir Converter</title>
+  </head>
+  <body>
+    <h1>CUP to OpenAir Converter</h1>
+
+    <form>
+      <label for="cupFile">Select a CUP file:</label>
+      <input type="file" id="cupFile" accept=".cup" required />
+      <br />
+
+      <label for="category"
+        >Airspace Category (max 5 letters, default is 'F'):</label
+      >
+      <input type="text" id="category" maxlength="5" placeholder="F" />
+      <br />
+
+      <button type="button" onclick="convertCUPtoOpenAir()">Convert</button>
+    </form>
+
+    <hr />
+
+    <h2>OpenAir airspace content:</h2>
+    <pre id="openAirContent"></pre>
+
+    <script>
+      console.debug('CUP to OpenAir Converter')
+
+      function convertCoordinateToSexagesimal(coordinate) {
+        const direction = coordinate.slice(-1)
+        const minutesDec = parseFloat(coordinate.substr(-7, 6))
+        const minutes = Math.floor(minutesDec).toString().padStart(2, '0')
+        const seconds = Math.round((minutesDec - Math.floor(minutesDec)) * 60).toString().padStart(2, '0')
+        let length = 3
+        if (["N", "S"].includes(direction)) {
+          length = 2
+        }
+        const degrees = coordinate.substr(0, length)
+
+        return `${degrees}:${minutes}:${seconds} ${direction}`
+      }
+
+      function convertCUPtoOpenAir() {
+        const cupFileInput = document.getElementById('cupFile')
+        const openAirContent = document.getElementById('openAirContent')
+        const categoryInput = document.getElementById('category')
+
+        const cupFile = cupFileInput.files[0]
+        if (!cupFile) {
+          alert('Please select a CUP file to convert.')
+          return
+        }
+
+        const reader = new FileReader()
+
+        reader.onload = function (e) {
+          const cupContent = e.target.result
+          const cupLines = cupContent.split('\n')
+
+          let openAirContentText = ''
+
+          let inRelatedTasks = false
+
+          // Skip the first line (header)
+          let skipFirstLine = true
+
+          const category =
+            categoryInput.value.toUpperCase().substring(0, 5) || 'F'
+
+          for (const line of cupLines) {
+            if (skipFirstLine) {
+              skipFirstLine = false
+              continue
+            }
+
+            if (line.trim() === '-----Related Tasks-----') {
+              break // Exit the loop when "-----Related Tasks-----" is encountered
+            }
+
+            const fields = line.split(',')
+            if (fields.length >= 5) {
+              const name = fields[0].replace(/"/g, '')
+              const code = fields[1]
+              const lat = convertCoordinateToSexagesimal(fields[3])
+              const lon = convertCoordinateToSexagesimal(fields[4])
+
+              const airspaceName = `AN ${code} ${name}`
+              const center = `V X=${lat} ${lon}`
+              const radius = 'DC 0.2160' // 400 meters in nautical miles
+
+              openAirContentText += `AC ${category}\n${airspaceName}\nAL SFC\nAH UNL\n${center}\n${radius}\n\n`
+            }
+          }
+
+          openAirContent.textContent = openAirContentText
+        }
+
+        reader.readAsText(cupFile)
+      }
+    </script>
+  </body>
+</html>
