@@ -17,6 +17,10 @@
       <input type="text" id="category" maxlength="5" placeholder="F" />
       <br />
 
+      <label for="radius">Radius in meters (default is 400):</label>
+      <input type="number" id="radius" min="1" placeholder="400" />
+      <br />
+
       <button type="button" onclick="convertCUPtoOpenAir()">Convert</button>
     </form>
 
@@ -32,9 +36,11 @@
         const direction = coordinate.slice(-1)
         const minutesDec = parseFloat(coordinate.substr(-7, 6))
         const minutes = Math.floor(minutesDec).toString().padStart(2, '0')
-        const seconds = Math.round((minutesDec - Math.floor(minutesDec)) * 60).toString().padStart(2, '0')
+        const seconds = Math.round((minutesDec - Math.floor(minutesDec)) * 60)
+          .toString()
+          .padStart(2, '0')
         let length = 3
-        if (["N", "S"].includes(direction)) {
+        if (['N', 'S'].includes(direction)) {
           length = 2
         }
         const degrees = coordinate.substr(0, length)
@@ -42,10 +48,16 @@
         return `${degrees}:${minutes}:${seconds} ${direction}`
       }
 
+      function convertMetersToNauticalMiles(meters) {
+        // 1 meter is approximately 0.00053996 nautical miles
+        return (meters * 0.00053996).toFixed(4)
+      }
+
       function convertCUPtoOpenAir() {
         const cupFileInput = document.getElementById('cupFile')
         const openAirContent = document.getElementById('openAirContent')
         const categoryInput = document.getElementById('category')
+        const radiusInput = document.getElementById('radius')
 
         const cupFile = cupFileInput.files[0]
         if (!cupFile) {
@@ -68,6 +80,7 @@
 
           const category =
             categoryInput.value.toUpperCase().substring(0, 5) || 'F'
+          const radius = convertMetersToNauticalMiles(radiusInput.value || 400)
 
           for (const line of cupLines) {
             if (skipFirstLine) {
@@ -88,9 +101,9 @@
 
               const airspaceName = `AN ${code} ${name}`
               const center = `V X=${lat} ${lon}`
-              const radius = 'DC 0.2160' // 400 meters in nautical miles
+              const radiusParam = `DC ${radius}` // Radius in nautical miles
 
-              openAirContentText += `AC ${category}\n${airspaceName}\nAL SFC\nAH UNL\n${center}\n${radius}\n\n`
+              openAirContentText += `AC ${category}\n${airspaceName}\nAL SFC\nAH UNL\n${center}\n${radiusParam}\n\n`
             }
           }
 
