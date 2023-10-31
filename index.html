@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="h-100">
   <head>
     <meta charset="utf-8" />
@@ -84,9 +84,7 @@
       <div class="container" style="max-width: 600px">
         <form class="mt-3">
           <div class="mb-3">
-            <label for="cupFile" class="form-label"
-              >Select a SeeYou CUP file:</label
-            >
+            <label for="cupFile" class="form-label">SeeYou CUP file:</label>
             <input
               type="file"
               class="form-control"
@@ -94,6 +92,9 @@
               accept=".cup"
               required
             />
+            <div id="cupFileHelp" class="form-text">
+              Only the waypoints will be converted.
+            </div>
           </div>
 
           <div class="mb-3">
@@ -107,19 +108,19 @@
             />
             <div id="categoryHelp" class="form-text">
               Max 5 letters, default is 'F. This will change the color and
-              behaviour of the airspaces.
-              <br />See the available classes of the
+              behaviour of the airspaces on your flight computer. See the
+              available classes of the
               <a
                 href="http://www.winpilot.com/usersguide/userairspace.asp"
                 target="_blank"
-                >WinPilot OpenAir airspace format</a
-              >
+                >WinPilot OpenAir format</a
+              >.
             </div>
           </div>
 
           <div class="mb-3">
             <label for="radius" class="form-label"
-              >Radius in meters (default is 400):</label
+              >Radius in meters:</label
             >
             <input
               type="number"
@@ -128,6 +129,9 @@
               min="1"
               placeholder="400"
             />
+            <div id="cupFileHelp" class="form-text">
+              Default radius is 400m.
+            </div>
           </div>
 
           <button
