@@ -2,40 +2,90 @@
 <html>
   <head>
     <title>CUP to OpenAir Converter</title>
+    <!-- Include Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1>CUP to OpenAir Converter</h1>
+    <div class="container">
+      <h1 class="mt-3">CUP to OpenAir Converter</h1>
 
-    <form>
-      <label for="cupFile">Select a CUP file:</label>
-      <input type="file" id="cupFile" accept=".cup" required />
-      <br />
+      <form class="mt-3">
+        <div class="mb-3">
+          <label for="cupFile" class="form-label"
+            >Select a SeeYou CUP file:</label
+          >
+          <input
+            type="file"
+            class="form-control"
+            id="cupFile"
+            accept=".cup"
+            required
+          />
+        </div>
 
-      <label for="category"
-        >Airspace Category (max 5 letters, default is 'F'):</label
+        <div class="mb-3">
+          <label for="category" class="form-label">Airspace Category</label>
+          <input
+            type="text"
+            class="form-control"
+            id="category"
+            maxlength="5"
+            placeholder="F"
+          />
+          <div id="categoryHelp" class="form-text">
+            Max 5 letters, default is 'F. This will change the color and
+            behaviour of the airspaces.
+            <br />See the available classes of the
+            <a
+              href="http://www.winpilot.com/usersguide/userairspace.asp"
+              target="_blank"
+              >WinPilot OpenAir airspace format</a
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="radius" class="form-label"
+            >Radius in meters (default is 400):</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="radius"
+            min="1"
+            placeholder="400"
+          />
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="convertCUPtoOpenAir()"
+        >
+          Convert
+        </button>
+      </form>
+
+      <hr class="mt-4" />
+
+      <button
+        id="downloadButton"
+        class="btn btn-primary"
+        onclick="downloadOpenAirFile()"
+        style="display: none"
       >
-      <input type="text" id="category" maxlength="5" placeholder="F" />
-      <br />
+        Download OpenAir File
+      </button>
 
-      <label for="radius">Radius in meters (default is 400):</label>
-      <input type="number" id="radius" min="1" placeholder="400" />
-      <br />
+      <h2 class="mt-3">OpenAir airspace content:</h2>
+      <pre id="openAirContent" style="overflow: auto; max-height: 300px"></pre>
+    </div>
 
-      <button type="button" onclick="convertCUPtoOpenAir()">Convert</button>
-    </form>
-
-    <hr />
-
-    <button
-      id="downloadButton"
-      onclick="downloadOpenAirFile()"
-      style="display: none"
-    >
-      Download OpenAir File
-    </button>
-
-    <h2>OpenAir airspace content:</h2>
-    <pre id="openAirContent" style="overflow: auto; max-height: 300px"></pre>
+    <!-- Include Bootstrap JavaScript (for Bootstrap 5) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
       console.debug('CUP to OpenAir Converter')
