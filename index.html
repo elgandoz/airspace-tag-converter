@@ -26,8 +26,16 @@
 
     <hr />
 
+    <button
+      id="downloadButton"
+      onclick="downloadOpenAirFile()"
+      style="display: none"
+    >
+      Download OpenAir File
+    </button>
+
     <h2>OpenAir airspace content:</h2>
-    <pre id="openAirContent"></pre>
+    <pre id="openAirContent" style="overflow: auto; max-height: 300px"></pre>
 
     <script>
       console.debug('CUP to OpenAir Converter')
@@ -58,6 +66,7 @@
         const openAirContent = document.getElementById('openAirContent')
         const categoryInput = document.getElementById('category')
         const radiusInput = document.getElementById('radius')
+        const downloadButton = document.getElementById('downloadButton')
 
         const cupFile = cupFileInput.files[0]
         if (!cupFile) {
@@ -108,9 +117,24 @@
           }
 
           openAirContent.textContent = openAirContentText
+          downloadButton.style.display = 'block'
         }
 
         reader.readAsText(cupFile)
+      }
+
+      function downloadOpenAirFile() {
+        const openAirContent =
+          document.getElementById('openAirContent').textContent
+        const filename =
+          (document
+            .getElementById('cupFile')
+            .files[0].name.replace('.cup', '') || 'airspace') + '-airspace.txt'
+        const blob = new Blob([openAirContent], { type: 'text/plain' })
+        const link = document.createElement('a')
+        link.href = URL.createObjectURL(blob)
+        link.download = filename
+        link.click()
       }
     </script>
   </body>
