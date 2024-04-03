@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pyrenees Air Tour Playground JSON to CUP Converter</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        margin: 1em;
+      }
+      h2 {
+        color: #333;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        padding: 1em;
+        border: 1px #bcc6d1 solid;
+        border-radius: 0.5rem;
+        background: aliceblue;
+      }
+      </style>
+  </head>
+<body>
+
+<h2><a href="https://www.pyreneesairtour.com/en/playground" target="_blank">Pyrenees Air Tour</a> Playground JSON to CUP Converter</h2>
+
+Download converted files:
+<ul>
+  <li><a href="./Pyrenees_Air_Tour.cup" download target="_blank">Pyrenees_Air_Tour.cup</a></li>
+  <li><a href="./Pyrenees_Air_Tour-airspace.txt" download target="_blank">Pyrenees_Air_Tour-airspace.txt</a> (Class F - 400m radius except for 200m arrival)</li>
+</ul>
+
+<pre id="output"></pre>
+
+<script>
+  var json = {
+    "waypoints": {
+      "1": {
+        "id": "1",
+        "name": "La Chapelle Superbagn\u00e8res",
+        "rayon": "400",
+        "type": "start",
+        "score": "0",
+        "altitude": "1774",
+        "geolocalisation": [
+          "42.767843",
+          "0.579837"
+        ]
+      },
+      "2": {
+        "id": "2",
+        "name": "A\u00e9rodrome",
+        "rayon": "400",
+        "type": "end",
+        "score": "0",
+        "altitude": "615",
+        "geolocalisation": [
+          "42.79989",
+          "0.599462"
+        ]
+      },
+      "3": {
+        "id": "3",
+        "name": "Pic de C\u00e9cir\u00e9",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "500",
+        "altitude": "2403",
+        "geolocalisation": [
+          "42.757267",
+          "0.537926"
+        ]
+      },
+      "4": {
+        "id": "4",
+        "name": "Refuge d\u0027Espingo",
+        "rayon": "200",
+        "type": "refuge",
+        "score": "1000",
+        "altitude": "1950",
+        "geolocalisation": [
+          "42.730502",
+          "0.499566"
+        ]
+      },
+      "5": {
+        "id": "5",
+        "name": "Refuge de V\u00e9nasque",
+        "rayon": "200",
+        "type": "refuge",
+        "score": "1000",
+        "altitude": "2250",
+        "geolocalisation": [
+          "42.699569",
+          "0.642357"
+        ]
+      },
+      "6": {
+        "id": "6",
+        "name": "Soum de l\u0027Escalette",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "500",
+        "altitude": "2468",
+        "geolocalisation": [
+          "42.690986",
+          "0.676361"
+        ]
+      },
+      "7": {
+        "id": "7",
+        "name": "Mont du Lys",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "500",
+        "altitude": "2234",
+        "geolocalisation": [
+          "42.726941",
+          "0.579332"
+        ]
+      },
+      "8": {
+        "id": "8",
+        "name": "Pic de Sauvegarde",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "500",
+        "altitude": "2737",
+        "geolocalisation": [
+          "42.694965",
+          "0.631308"
+        ]
+      },
+      "9": {
+        "id": "9",
+        "name": "Tuc du plan de la Serre",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "500",
+        "altitude": "1977",
+        "geolocalisation": [
+          "42.75466",
+          "0.63888"
+        ]
+      },
+      "10": {
+        "id": "10",
+        "name": "Pic Royo",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "800",
+        "altitude": "3122",
+        "geolocalisation": [
+          "42.6977",
+          "0.52077"
+        ]
+      },
+      "11": {
+        "id": "11",
+        "name": "Tusse de Montarqu\u00e9",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "500",
+        "altitude": "2883",
+        "geolocalisation": [
+          "42.703882",
+          "0.498722"
+        ]
+      },
+      "12": {
+        "id": "12",
+        "name": "Pic d\u0027Estos",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1000",
+        "altitude": "2803",
+        "geolocalisation": [
+          "42.7517",
+          "0.3844"
+        ]
+      },
+      "13": {
+        "id": "13",
+        "name": "Cap des Hittes",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "500",
+        "altitude": "2368",
+        "geolocalisation": [
+          "42.759483",
+          "0.463732"
+        ]
+      },
+      "14": {
+        "id": "14",
+        "name": "Coume de Herr\u00e8re",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "500",
+        "altitude": "1841",
+        "geolocalisation": [
+          "42.83204",
+          "0.51922"
+        ]
+      },
+      "15": {
+        "id": "15",
+        "name": "Mont N\u00e9",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1000",
+        "altitude": "2147",
+        "geolocalisation": [
+          "42.87753",
+          "0.47655"
+        ]
+      },
+      "16": {
+        "id": "16",
+        "name": "Sommet d\u0027Ant\u00e9nac",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1000",
+        "altitude": "1990",
+        "geolocalisation": [
+          "42.856391",
+          "0.565034"
+        ]
+      },
+      "17": {
+        "id": "17",
+        "name": "Cap de Pouy de Hourmigu\u00e9",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1500",
+        "altitude": "1685",
+        "geolocalisation": [
+          "42.91881",
+          "0.59631"
+        ]
+      },
+      "18": {
+        "id": "18",
+        "name": "Plan de Montmajou",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "500",
+        "altitude": "2081",
+        "geolocalisation": [
+          "42.8316",
+          "0.65995"
+        ]
+      },
+      "19": {
+        "id": "19",
+        "name": "Sommet de la Laque",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "500",
+        "altitude": "1900",
+        "geolocalisation": [
+          "42.78316",
+          "0.64539"
+        ]
+      },
+      "20": {
+        "id": "20",
+        "name": "Pic de Cagire",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1500",
+        "altitude": "1920",
+        "geolocalisation": [
+          "42.946562",
+          "0.765937"
+        ]
+      },
+      "21": {
+        "id": "21",
+        "name": "Pic de Cornud\u00e8re",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2500",
+        "altitude": "1563",
+        "geolocalisation": [
+          "42.95793",
+          "0.89"
+        ]
+      },
+      "22": {
+        "id": "22",
+        "name": "Pic de la Calabasse",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2000",
+        "altitude": "2210",
+        "geolocalisation": [
+          "42.86943",
+          "0.85858"
+        ]
+      },
+      "23": {
+        "id": "23",
+        "name": "Signal de Bassia",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2000",
+        "altitude": "1921",
+        "geolocalisation": [
+          "42.9753",
+          "0.29875"
+        ]
+      },
+      "24": {
+        "id": "24",
+        "name": "Arbizon",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1500",
+        "altitude": "2831",
+        "geolocalisation": [
+          "42.87585",
+          "0.27297"
+        ]
+      },
+      "25": {
+        "id": "25",
+        "name": "Cap de Laub\u00e8re",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1200",
+        "altitude": "2213",
+        "geolocalisation": [
+          "42.78066",
+          "0.32696"
+        ]
+      },
+      "26": {
+        "id": "26",
+        "name": "Pic de l\u0027Aiguillette",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2000",
+        "altitude": "2517",
+        "geolocalisation": [
+          "42.7368",
+          "0.17584"
+        ]
+      },
+      "27": {
+        "id": "27",
+        "name": "Pic du Midi",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2000",
+        "altitude": "2876",
+        "geolocalisation": [
+          "42.93706",
+          "0.14107"
+        ]
+      },
+      "28": {
+        "id": "28",
+        "name": "Pic de Montaigu",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2500",
+        "altitude": "2339",
+        "geolocalisation": [
+          "42.98302",
+          "0.06849"
+        ]
+      },
+      "29": {
+        "id": "29",
+        "name": "Pe\u00f1a Montanesa",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2000",
+        "altitude": "2295",
+        "geolocalisation": [
+          "42.49011",
+          "0.19929"
+        ]
+      },
+      "30": {
+        "id": "30",
+        "name": "Turbon",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "3000",
+        "altitude": "2492",
+        "geolocalisation": [
+          "42.41674",
+          "0.50482"
+        ]
+      },
+      "31": {
+        "id": "31",
+        "name": "Gallinero",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1800",
+        "altitude": "2728",
+        "geolocalisation": [
+          "42.54141",
+          "0.55464"
+        ]
+      },
+      "32": {
+        "id": "32",
+        "name": "Aneto",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "3000",
+        "altitude": "3404",
+        "geolocalisation": [
+          "42.6308",
+          "0.65659"
+        ]
+      },
+      "33": {
+        "id": "33",
+        "name": "Posets",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "3000",
+        "altitude": "3368",
+        "geolocalisation": [
+          "42.65401",
+          "0.43527"
+        ]
+      },
+      "34": {
+        "id": "34",
+        "name": "Puntal de Bacharo",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2000",
+        "altitude": "2316",
+        "geolocalisation": [
+          "42.61182",
+          "0.2039"
+        ]
+      },
+      "35": {
+        "id": "35",
+        "name": "Pic de la Robi\u00f1era",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2500",
+        "altitude": "3001",
+        "geolocalisation": [
+          "42.7017",
+          "0.13281"
+        ]
+      },
+      "36": {
+        "id": "36",
+        "name": "Montagne d\u0027Areng",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1500",
+        "altitude": "2079",
+        "geolocalisation": [
+          "42.914687",
+          "0.459568"
+        ]
+      },
+      "37": {
+        "id": "37",
+        "name": "Tourroc",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2000",
+        "altitude": "1541",
+        "geolocalisation": [
+          "42.981648",
+          "0.537346"
+        ]
+      },
+      "38": {
+        "id": "38",
+        "name": "Pic du Gar",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1500",
+        "altitude": "1785",
+        "geolocalisation": [
+          "42.950335",
+          "0.698669"
+        ]
+      },
+      "39": {
+        "id": "39",
+        "name": "Cap de P\u00e8ne de Soulit",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "500",
+        "altitude": "2031",
+        "geolocalisation": [
+          "42.789321",
+          "0.461956"
+        ]
+      },
+      "40": {
+        "id": "40",
+        "name": "Cap de Hount N\u00e8re",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "500",
+        "altitude": "1916",
+        "geolocalisation": [
+          "42.816896",
+          "0.455363"
+        ]
+      },
+      "41": {
+        "id": "41",
+        "name": "Pic d\u0027Arrouye",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1500",
+        "altitude": "2566",
+        "geolocalisation": [
+          "42.81199",
+          "0.247353"
+        ]
+      },
+      "42": {
+        "id": "42",
+        "name": "Nord N\u00e8re",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "500",
+        "altitude": "2844",
+        "geolocalisation": [
+          "42.743246",
+          "0.46296"
+        ]
+      },
+      "43": {
+        "id": "43",
+        "name": "Montlude",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1500",
+        "altitude": "2514",
+        "geolocalisation": [
+          "42.785236",
+          "0.7587"
+        ]
+      },
+      "44": {
+        "id": "44",
+        "name": "Montanha d\u0027Uish\u00e8ra",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1000",
+        "altitude": "2312",
+        "geolocalisation": [
+          "42.765588",
+          "0.732737"
+        ]
+      },
+      "45": {
+        "id": "45",
+        "name": "Montpius",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1000",
+        "altitude": "2274",
+        "geolocalisation": [
+          "42.690688",
+          "0.741565"
+        ]
+      },
+      "46": {
+        "id": "46",
+        "name": "Punta Suelza",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2000",
+        "altitude": "2971",
+        "geolocalisation": [
+          "42.652064",
+          "0.289878"
+        ]
+      },
+      "47": {
+        "id": "47",
+        "name": "Pico Mener",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2000",
+        "altitude": "2452",
+        "geolocalisation": [
+          "42.685719",
+          "0.238413"
+        ]
+      },
+      "48": {
+        "id": "48",
+        "name": "Suerio",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "3000",
+        "altitude": "1950",
+        "geolocalisation": [
+          "42.533989",
+          "-0.084289"
+        ]
+      },
+      "49": {
+        "id": "49",
+        "name": "Cap des Hounts Secs",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "500",
+        "altitude": "2698",
+        "geolocalisation": [
+          "42.733719",
+          "0.515145"
+        ]
+      },
+      "50": {
+        "id": "50",
+        "name": "Refuge d\u0027Estos",
+        "rayon": "200",
+        "type": "refuge",
+        "score": "1000",
+        "altitude": "1894",
+        "geolocalisation": [
+          "42.675521",
+          "0.485263"
+        ]
+      },
+      "51": {
+        "id": "51",
+        "name": "Refuge de la Rencluse",
+        "rayon": "200",
+        "type": "refuge",
+        "score": "1000",
+        "altitude": "2140",
+        "geolocalisation": [
+          "42.66936",
+          "0.650822"
+        ]
+      },
+      "52": {
+        "id": "52",
+        "name": "Mail Planet",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "800",
+        "altitude": "2942",
+        "geolocalisation": [
+          "42.697359",
+          "0.567192"
+        ]
+      },
+      "53": {
+        "id": "53",
+        "name": "Refuge du Maupas",
+        "rayon": "200",
+        "type": "refuge",
+        "score": "1000",
+        "altitude": "2430",
+        "geolocalisation": [
+          "42.714789",
+          "0.549054"
+        ]
+      },
+      "54": {
+        "id": "54",
+        "name": "Refuge de Bastan",
+        "rayon": "200",
+        "type": "refuge",
+        "score": "1000",
+        "altitude": "2248",
+        "geolocalisation": [
+          "42.853237",
+          "0.209725"
+        ]
+      },
+      "55": {
+        "id": "55",
+        "name": "Pic des Crampettes",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2000",
+        "altitude": "2450",
+        "geolocalisation": [
+          "42.871828",
+          "0.104198"
+        ]
+      },
+      "56": {
+        "id": "56",
+        "name": "Soum de Lascours",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2500",
+        "altitude": "2420",
+        "geolocalisation": [
+          "42.931668",
+          "0.045662"
+        ]
+      },
+      "57": {
+        "id": "57",
+        "name": "Soum de Tr\u00e9z\u00e8res",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2500",
+        "altitude": "1617",
+        "geolocalisation": [
+          "43.013246",
+          "-0.016467"
+        ]
+      },
+      "58": {
+        "id": "58",
+        "name": "Hospice de France",
+        "rayon": "200",
+        "type": "refuge",
+        "score": "1000",
+        "altitude": "1385",
+        "geolocalisation": [
+          "42.721053954896",
+          "0.65486715736644"
+        ]
+      },
+      "59": {
+        "id": "59",
+        "name": "Refuge Jacques Husson",
+        "rayon": "200",
+        "type": "refuge",
+        "score": "1000",
+        "altitude": "1954",
+        "geolocalisation": [
+          "42.83463",
+          "0.873422"
+        ]
+      },
+      "60": {
+        "id": "60",
+        "name": "Refuge Angel\u0027Orus",
+        "rayon": "400",
+        "type": "refuge",
+        "score": "1000",
+        "altitude": "2150",
+        "geolocalisation": [
+          "42.62748599",
+          "0.45743465"
+        ]
+      },
+      "61": {
+        "id": "61",
+        "name": "Refuge des Estagnous",
+        "rayon": "400",
+        "type": "refuge",
+        "score": "1000",
+        "altitude": "2240",
+        "geolocalisation": [
+          "42.7975401",
+          "1.07243047"
+        ]
+      },
+      "62": {
+        "id": "62",
+        "name": "Pic de Crab\u00e8re",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2000",
+        "altitude": "2630",
+        "geolocalisation": [
+          "42.825754",
+          "0.857897"
+        ]
+      },
+      "63": {
+        "id": "63",
+        "name": "Mail de Bulard",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2000",
+        "altitude": "2750",
+        "geolocalisation": [
+          "42.806",
+          "0.9601"
+        ]
+      },
+      "64": {
+        "id": "64",
+        "name": "Tuc de l\u0027\u00c9tang",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "1500",
+        "altitude": "1812",
+        "geolocalisation": [
+          "42.902037",
+          "0.765861"
+        ]
+      },
+      "65": {
+        "id": "65",
+        "name": "Mont Valier",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "3000",
+        "altitude": "2838",
+        "geolocalisation": [
+          "42.797858",
+          "1.085658"
+        ]
+      },
+      "66": {
+        "id": "66",
+        "name": "Pic Rouge de Bassi\u00e8s",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "5000",
+        "altitude": "2676",
+        "geolocalisation": [
+          "42.734689",
+          "1.391177"
+        ]
+      },
+      "67": {
+        "id": "67",
+        "name": "Tuc des Pelades",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2500",
+        "altitude": "1608",
+        "geolocalisation": [
+          "42.888187",
+          "1.09273"
+        ]
+      },
+      "68": {
+        "id": "68",
+        "name": "Pic de l\u0027Arraing",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2000",
+        "altitude": "1974",
+        "geolocalisation": [
+          "42.898015",
+          "0.975113"
+        ]
+      },
+      "69": {
+        "id": "69",
+        "name": "Tuc de Peyre Mensong\u00e8re",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "4000",
+        "altitude": "1711",
+        "geolocalisation": [
+          "42.797925",
+          "1.226335"
+        ]
+      },
+      "70": {
+        "id": "70",
+        "name": "Pic des trois Seigneurs",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "5000",
+        "altitude": "2199",
+        "geolocalisation": [
+          "42.830235",
+          "1.439961"
+        ]
+      },
+      "71": {
+        "id": "71",
+        "name": "Tuc d\u0027Areho",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": "2500",
+        "altitude": "2523",
+        "geolocalisation": [
+          "42.736356",
+          "0.86969"
+        ]
+      },
+      "72": {
+        "id": "72",
+        "name": "Tuc de Parros",
+        "rayon": "400",
+        "type": "waypoint",
+        "score": null,
+        "altitude": "2729",
+        "geolocalisation": [
+          "42.76771",
+          "0.933008"
+        ]
+      },
+      "73": {
+        "id": "73",
+        "name": "Tuc de Baciver",
+        "rayon": null,
+        "type": "waypoint",
+        "score": null,
+        "altitude": "2642",
+        "geolocalisation": [
+          "42.712586",
+          "0.991715"
+        ]
+      }
+    }
+  };
+
+  function convertLatLon(decimalDegree, type) {
+    var degree = Math.floor(decimalDegree);
+    var decimalMinutes = (decimalDegree - degree) * 60;
+    var direction = degree >= 0 ? (type === 'lon' ? 'E' : 'N') : (type === 'lon' ? 'W' : 'S');
+    if (type == 'lat') {
+      return ('00' + Math.abs(degree)).slice(-2) + (''+decimalMinutes.toFixed(3)) + direction;
+    }
+    return ('00' + Math.abs(degree)).slice(-3) + (decimalMinutes.toFixed(3)) + direction;
+  }
+
+  function convert() {
+    var output = 'name,code,country,lat,lon,elev,style,rwdir,rwlen,freq,desc';
+    for (var key in json.waypoints) {
+      var waypoint = json.waypoints[key];
+      var name = waypoint.name;
+      var code = waypoint.id;
+      var country = '';
+      var lat = convertLatLon(parseFloat(waypoint.geolocalisation[0]), 'lat');
+      var lon = convertLatLon(parseFloat(waypoint.geolocalisation[1]), 'lon');
+      var elev = waypoint.altitude + '.0m';
+      var style = waypoint.type === 'start' ? '20' : waypoint.type === 'end' ? '2' : waypoint.type === 'refuge' ? '16' : '1';
+      var rwdir = '';
+      var rwlen = '';
+      var freq = '';
+      var desc = '';
+      output += '\n' + [name, code, country, lat, lon, elev, style, rwdir, rwlen, freq, desc].join(',');
+    }
+    document.getElementById('output').innerText = output;
+  }
+
+  convert();
+</script>
+
+</body>
+</html>
